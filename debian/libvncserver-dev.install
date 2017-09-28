@@ -1,0 +1,5 @@
+usr/include/rfb
+usr/lib/*/libvncclient.so
+usr/lib/*/libvncserver.so
+usr/lib/*/pkgconfig/libvncserver.pc
+usr/lib/*/pkgconfig/libvncclient.pc

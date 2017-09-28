@@ -1,0 +1,21 @@
+#!/usr/bin/make -f
+
+VERSION = $(shell head -n1 debian/changelog | sed -e 's/.*(//;s/-.*).*//')
+
+export LIBTOOLIZE
+
+%:
+	dh $@ $(EXTRA_DH_ARG) --with autoreconf
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -f rfb/rfbconfig.h
+
+override_dh_auto_configure:
+	dh_auto_configure 
+
+override_dh_strip:
+	dh_strip -plibvncclient1 --dbg-package=libvncclient1-dbg
+	dh_strip -plibvncserver1 --dbg-package=libvncserver1-dbg
+	dh_strip
+

@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+cd "$ADTTMP"
+cat > test.c << EOF
+#include <rfb/rfbclient.h>
+
+int main(int argc, char *argv[])
+{
+        rfbClient *client;
+        client = rfbGetClient(8, 3, 4);
+        rfbClientCleanup(client);
+        return 0;
+}
+
+EOF
+gcc -Wall -o test test.c -lvncclient
+./test
+objdump -p test | grep "libvncclient"

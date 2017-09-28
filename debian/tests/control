@@ -1,0 +1,9 @@
+Tests: smoketest-libvncserver
+Depends: libvncserver-dev,
+         build-essential
+
+Tests: smoketest-libvncclient
+Depends: libvncserver-dev,
+         build-essential
+
+
