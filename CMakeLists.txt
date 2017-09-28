@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.4)
 cmake_policy(SET CMP0037 NEW)
 
 project(LibVNCServer)
+include(GNUInstallDirs)
 include(CheckFunctionExists)
 include(CheckIncludeFile)
 include(CheckTypeSize)
@@ -15,7 +16,7 @@ set(PACKAGE_NAME           "LibVNCServer")
 set(FULL_PACKAGE_NAME      "LibVNCServer")
 set(VERSION_MAJOR          "0")
 set(VERSION_MINOR          "9")
-set(VERSION_PATCHLEVEL     "12")
+set(VERSION_PATCHLEVEL     "14")
 set(VERSION_SO             "1")
 set(PACKAGE_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCHLEVEL}")
 set(PROJECT_BUGREPORT_PATH "https://github.com/LibVNC/libvncserver/issues")
@@ -393,6 +394,7 @@ endif(LIBVNCSERVER_WITH_WEBSOCKETS)
 
 add_library(vncclient ${LIBVNCCLIENT_SOURCES})
 add_library(vncserver ${LIBVNCSERVER_SOURCES})
+
 if(WIN32)
   set(ADDITIONAL_LIBS ${ADDITIONAL_LIBS} ws2_32)
 endif(WIN32)
@@ -600,8 +602,8 @@ get_link_libraries(PRIVATE_LIBS vncclient)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libvncclient.pc.cmakein ${CMAKE_CURRENT_BINARY_DIR}/libvncclient.pc @ONLY)
 
 
-install_targets(/lib vncserver)
-install_targets(/lib vncclient)
+install_targets(/lib/x86_64-linux-gnu vncserver)
+install_targets(/lib/x86_64-linux-gnu vncclient)
 install_files(/include/rfb FILES
     rfb/keysym.h
     rfb/rfb.h
@@ -611,7 +613,7 @@ install_files(/include/rfb FILES
     rfb/rfbregion.h
 )
 
-install_files(/lib/pkgconfig FILES
+install_files(/lib/x86_64-linux-gnu/pkgconfig FILES
     libvncserver.pc
     libvncclient.pc
 )
